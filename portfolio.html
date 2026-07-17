@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soniya Ghimire — UI/UX &amp; Frontend Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,450;9..144,600;9..144,680&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#122019;
+    --ink-2:#1B2E23;
+    --paper:#FBF8F2;
+    --paper-card:#FFFFFF;
+    --cream-2:#F1EDE1;
+    --emerald:#3F8556;
+    --emerald-bright:#5FB579;
+    --apricot:#F0A053;
+    --apricot-2:#F6C48B;
+    --violet:#6B5FD8;
+    --violet-2:#E4E1FA;
+    --line:#DAD3C0;
+    --line-dark:rgba(255,255,255,0.16);
+    --text-soft:#5B6459;
+    --text-faint:#8C9188;
+    --radius:3px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;}
+  img{max-width:100%; display:block;}
+  ::selection{background:var(--emerald); color:#fff;}
+  .mono{font-family:'IBM Plex Mono',monospace; letter-spacing:0.02em;}
+  .wrap{max-width:1200px; margin:0 auto; padding:0 40px;}
+  h1,h2,h3{font-family:'Fraunces',serif; font-weight:600; letter-spacing:-0.01em; margin:0;}
+  em{font-style:italic;}
+
+  a:focus-visible, button:focus-visible{outline:2px solid var(--violet); outline-offset:3px;}
+
+  .reveal{opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ================= HEADER ================= */
+  header{
+    position:sticky; top:0; z-index:60;
+    background:rgba(251,248,242,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex; align-items:center; justify-content:space-between; padding:20px 0;}
+  .logo{display:flex; align-items:center; gap:9px; font-family:'Fraunces',serif; font-weight:680; font-size:20px;}
+  .logo-mark{width:11px; height:11px; background:var(--emerald); border-radius:50% 50% 50% 0; transform:rotate(-45deg);}
+  .nav-links{display:flex; gap:34px; list-style:none; margin:0; padding:0; font-size:14px;}
+  .nav-links a{text-decoration:none; color:var(--text-soft); transition:color .2s ease;}
+  .nav-links a:hover, .nav-links a:focus-visible{color:var(--ink);}
+  .nav-cta{
+    font-family:'IBM Plex Mono',monospace; font-size:13px;
+    padding:9px 18px; background:var(--ink); color:var(--paper);
+    border-radius:30px; text-decoration:none; transition:background .2s ease, transform .2s ease;
+  }
+  .nav-cta:hover, .nav-cta:focus-visible{background:var(--emerald); transform:translateY(-1px);}
+
+  /* ================= HERO (dark) ================= */
+  .hero{
+    position:relative;
+    background:radial-gradient(120% 140% at 15% -10%, #1E3A28 0%, var(--ink) 55%);
+    color:var(--paper);
+    overflow:hidden;
+    padding:120px 0 90px;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;
+    top:-220px; right:-180px;
+    width:640px; height:640px;
+    background:conic-gradient(from 120deg, var(--emerald-bright), var(--apricot), var(--violet), var(--emerald-bright));
+    filter:blur(120px);
+    opacity:0.4;
+    border-radius:50%;
+    pointer-events:none;
+  }
+  .hero::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px);
+    background-size:26px 26px;
+    -webkit-mask-image:linear-gradient(to bottom, black, transparent 75%);
+    mask-image:linear-gradient(to bottom, black, transparent 75%);
+    pointer-events:none;
+  }
+  .hero-inner{position:relative; z-index:2;}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:9px;
+    font-size:18px; text-transform:uppercase; letter-spacing:0.1em;
+    color:var(--emerald-bright); margin-bottom:26px;
+  }
+  .eyebrow::before{content:""; width:8px; height:8px; border-radius:50%; background:var(--apricot);}
+  .hero h1{
+    font-size:clamp(42px, 6.4vw, 82px);
+    line-height:1.03;
+    max-width:920px;
+    color:#fff;
+  }
+  .hero h1 em{color:var(--emerald-bright); font-family:'Fraunces',serif;}
+  .hero-sub{
+    max-width:540px; margin:30px 0 40px; color:#C7CDC5; font-size:18px;
+  }
+  .hero-actions{display:flex; gap:16px; flex-wrap:wrap; margin-bottom:64px;}
+  .btn{
+    font-family:'IBM Plex Mono',monospace; font-size:13.5px;
+    padding:15px 26px; border-radius:40px; text-decoration:none;
+    display:inline-flex; align-items:center; gap:9px;
+    transition:transform .2s ease, background .2s ease, color .2s ease, box-shadow .2s ease;
+  }
+  .btn-primary{background:var(--emerald-bright); color:#0C1712; font-weight:500;}
+  .btn-primary:hover, .btn-primary:focus-visible{background:#7BCB93; transform:translateY(-2px); box-shadow:0 10px 26px rgba(95,181,121,0.35);}
+  .btn-ghost-dark{background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.35);}
+  .btn-ghost-dark:hover, .btn-ghost-dark:focus-visible{border-color:#fff; transform:translateY(-2px);}
+  .btn-ghost{background:transparent; color:var(--ink); border:1px solid var(--line);}
+  .btn-ghost:hover, .btn-ghost:focus-visible{border-color:var(--ink); transform:translateY(-2px);}
+  .btn-dark{background:var(--ink); color:var(--paper);}
+  .btn-dark:hover, .btn-dark:focus-visible{background:var(--emerald); transform:translateY(-2px);}
+
+  /* marquee */
+  .marquee-wrap{
+    border-top:1px solid var(--line-dark);
+    padding-top:30px;
+    overflow:hidden;
+    position:relative;
+    z-index:2;
+  }
+  .marquee{
+    display:flex; gap:56px; white-space:nowrap;
+    animation:scroll 26s linear infinite;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:14px; color:#8C9F91;
+  }
+  .marquee span{display:flex; align-items:center; gap:56px;}
+  .marquee b{color:#fff; font-weight:500;}
+  @keyframes scroll{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+  /* ================= SECTION SHARED ================= */
+  section{position:relative;}
+  .section-pad{padding:110px 0;}
+  .section-head{
+    display:flex; justify-content:space-between; align-items:flex-end; gap:24px;
+    margin-bottom:56px; border-bottom:1px solid var(--line); padding-bottom:24px;
+  }
+  .section-tag{
+    font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--emerald);
+    text-transform:uppercase; letter-spacing:0.09em; display:block; margin-bottom:12px;
+  }
+  .section-head h2{font-size:clamp(28px, 3.4vw, 42px);}
+  .section-head p{max-width:340px; color:var(--text-soft); font-size:14.5px; margin:0;}
+
+  /* ================= ABOUT ================= */
+  .about{background:var(--paper);}
+  .about-grid{
+    display:grid;
+    grid-template-columns:0.85fr 1.15fr;
+    gap:70px;
+    align-items:center;
+  }
+  .about-photo-wrap{position:relative;}
+  .about-photo-card{
+    position:relative;
+    background:var(--paper-card);
+    border-radius:18px;
+    padding:14px;
+    box-shadow:0 30px 60px -20px rgba(18,32,25,0.25);
+    transform:rotate(-2.5deg);
+  }
+  .about-photo{
+    border-radius:12px;
+    overflow:hidden;
+  }
+  .about-photo img{width:100%; height:auto; display:block;}
+  .badge-float{
+    position:absolute;
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    padding:10px 16px;
+    border-radius:30px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    box-shadow:0 14px 30px -8px rgba(18,32,25,0.35);
+  }
+  .badge-float .dot{width:8px; height:8px; border-radius:50%; background:var(--emerald-bright);}
+  .badge-top{top:-18px; right:-22px; transform:rotate(3deg);}
+  .badge-bottom{bottom:24px; left:-30px; background:var(--apricot); color:#3A2205; transform:rotate(-4deg);}
+
+  .about-copy .kicker{
+    font-family:'Fraunces',serif; font-style:italic; font-size:24px; font-weight:450;
+    color:var(--ink); line-height:1.45; margin:0 0 20px;
+  }
+  .about-copy p{color:var(--text-soft); font-size:16px; margin:0 0 18px;}
+  .stat-row{
+    display:grid; grid-template-columns:repeat(3,1fr);
+    gap:18px; margin:32px 0 8px;
+  }
+  .stat{
+    border-top:2px solid var(--ink); padding-top:12px;
+  }
+  .stat b{display:block; font-family:'Fraunces',serif; font-size:30px; font-weight:600;}
+  .stat span{font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--text-faint); text-transform:uppercase;}
+
+  .skills-panel{margin-top:40px;}
+  .skill-block{margin-bottom:22px;}
+  .skill-block h3{
+    font-family:'IBM Plex Mono',monospace; font-size:12px; text-transform:uppercase;
+    letter-spacing:0.08em; color:var(--text-faint); margin-bottom:12px; font-weight:500;
+  }
+  .chips{display:flex; flex-wrap:wrap; gap:9px;}
+  .chip{
+    font-family:'IBM Plex Mono',monospace; font-size:12.5px; padding:8px 14px;
+    border:1px solid var(--line); border-radius:30px; color:var(--text-soft); background:var(--paper-card);
+  }
+  .chip.emerald{border-color:var(--emerald); color:var(--emerald); background:#E7F2EA;}
+  .chip.violet{border-color:var(--violet); color:var(--violet); background:var(--violet-2);}
+  .chip.apricot{border-color:var(--apricot); color:#9A5C13; background:#FCEBD5;}
+
+  /* ================= WORK ================= */
+  .work{background:var(--cream-2);}
+  .work-list{display:flex; flex-direction:column; gap:26px;}
+  .work-card{
+    position:relative;
+    padding:0;
+    background:var(--paper-card);
+    border-radius:20px;
+    overflow:hidden;
+    display:grid;
+    grid-template-columns:0.85fr 1.35fr;
+    box-shadow:0 1px 0 var(--line);
+    transition:transform .35s ease, box-shadow .35s ease;
+  }
+  .work-card:hover{transform:translateY(-4px); box-shadow:0 26px 50px -22px rgba(18,32,25,0.28);}
+  .work-visual{
+    position:relative;
+    min-height:100%;
+    display:flex; align-items:center; justify-content:center;
+    padding:0;
+    background:linear-gradient(155deg, #E7F2EA, #FBF8F2 75%);
+    overflow:hidden;
+  }
+  .work-visual.v-apricot{background:linear-gradient(155deg, #FCEBD5, #FBF8F2 75%);}
+  .work-visual.v-violet{background:linear-gradient(155deg, var(--violet-2), #FBF8F2 75%);}
+  /* Real screenshots: fill the panel and crop nicely. Swap the <img src> in the HTML below. */
+  .work-visual img{
+    width:100%;
+    height:100%;
+    min-height:260px;
+    object-fit:cover;
+    object-position:top center;
+  }
+  .work-index{
+    position:absolute; top:20px; left:20px;
+    font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--text-faint);
+    background:rgba(251,248,242,0.85);
+    padding:3px 9px;
+    border-radius:20px;
+    z-index:2;
+  }
+  .work-body{padding:38px 40px;}
+  .work-role{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; text-transform:uppercase;
+    letter-spacing:0.06em; color:var(--emerald); margin-bottom:9px; display:block;
+  }
+  .work-body h3{font-size:26px; margin-bottom:13px;}
+  .work-body p{color:var(--text-soft); font-size:15px; margin:0 0 16px;}
+  .work-list-items{list-style:none; margin:0 0 22px; padding:0; display:flex; flex-direction:column; gap:9px;}
+  .work-list-items li{display:flex; gap:11px; font-size:14.5px; color:var(--text-soft);}
+  .work-list-items li::before{content:"→"; color:var(--emerald); flex-shrink:0;}
+  .work-footer{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;}
+  .work-tags{display:flex; flex-wrap:wrap; gap:7px;}
+  .work-tags .chip{font-size:11.5px; padding:6px 12px;}
+  .work-link{
+    font-family:'IBM Plex Mono',monospace; font-size:13px; text-decoration:none;
+    display:inline-flex; align-items:center; gap:7px; color:var(--ink);
+    border-bottom:1px solid var(--ink); padding-bottom:2px;
+    transition:color .2s ease, border-color .2s ease; white-space:nowrap;
+  }
+  .work-link:hover, .work-link:focus-visible{color:var(--emerald); border-color:var(--emerald);}
+
+  .more-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:48px;
+  }
+  .more-item{
+    background:var(--paper-card); border-radius:14px; padding:24px 20px;
+    border:1px solid var(--line);
+  }
+  .more-item .mono{font-size:11px; color:var(--text-faint); text-transform:uppercase; display:block; margin-bottom:9px;}
+  .more-item h4{font-family:'Inter',sans-serif; font-weight:600; font-size:14.5px; margin:0 0 6px;}
+  .more-item p{font-size:12.5px; color:var(--text-soft); margin:0; line-height:1.5;}
+
+  /* ================= EDUCATION / RESUME ================= */
+  .split{display:grid; grid-template-columns:1fr 1fr; gap:26px;}
+  .edu-card{
+    background:var(--paper-card); border-radius:18px; padding:34px;
+    border:1px solid var(--line); border-left:4px solid var(--emerald);
+  }
+  .edu-card .mono{font-size:12px; color:var(--emerald); display:block; margin-bottom:10px;}
+  .edu-card h3{font-size:20px; margin-bottom:8px;}
+  .edu-card p{color:var(--text-soft); font-size:14.5px; margin:4px 0;}
+  .langs{display:flex; gap:20px; margin-top:22px; font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--text-faint);}
+
+  .resume-card{
+    background:var(--ink); color:var(--paper); border-radius:18px; padding:38px;
+    display:flex; flex-direction:column; justify-content:space-between; position:relative; overflow:hidden;
+  }
+  .resume-card::before{
+    content:""; position:absolute; top:-100px; right:-100px; width:260px; height:260px;
+    background:var(--emerald-bright); filter:blur(90px); opacity:0.35; border-radius:50%;
+  }
+  .resume-card h3{color:#fff; font-size:23px; margin-bottom:10px; position:relative;}
+  .resume-card p{color:#C7CDC5; font-size:14.5px; margin:0 0 28px; max-width:320px; position:relative;}
+  .resume-card .btn{position:relative;}
+
+  /* ================= CONTACT ================= */
+  .contact{
+    text-align:center; padding:120px 0 100px;
+    background:radial-gradient(120% 140% at 50% 120%, #1E3A28 0%, var(--ink) 60%);
+    color:#fff;
+  }
+  .contact .eyebrow{justify-content:center;}
+  .contact h2{
+    font-size:clamp(34px,5.4vw,60px); max-width:760px; margin:0 auto 32px; line-height:1.1; color:#fff;
+  }
+  .contact h2 em{color:var(--emerald-bright);}
+  .contact-actions{display:flex; justify-content:center; gap:16px; flex-wrap:wrap; margin-bottom:54px;}
+  .contact-links{display:flex; justify-content:center; gap:34px; flex-wrap:wrap; font-family:'IBM Plex Mono',monospace; font-size:13.5px;}
+  .contact-links a{text-decoration:none; color:#B7BEB4; border-bottom:1px solid transparent; transition:color .2s ease, border-color .2s ease;}
+  .contact-links a:hover, .contact-links a:focus-visible{color:#fff; border-color:#fff;}
+
+  footer{border-top:1px solid var(--line); padding:26px 0; background:var(--paper);}
+  .footer-row{
+    display:flex; justify-content:space-between; align-items:center;
+    font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--text-faint);
+    flex-wrap:wrap; gap:10px;
+  }
+
+  /* ================= RESPONSIVE ================= */
+  @media (max-width: 980px){
+    .wrap{padding:0 26px;}
+    .about-grid{grid-template-columns:1fr; gap:48px;}
+    .about-photo-wrap{max-width:360px; margin:0 auto;}
+    .work-card{grid-template-columns:1fr;}
+    .work-visual{padding:0; min-height:220px;}
+    .more-grid{grid-template-columns:repeat(2,1fr);}
+    .split{grid-template-columns:1fr;}
+    .nav-links{display:none;}
+    .section-head{flex-direction:column; align-items:flex-start;}
+    .stat-row{gap:10px;}
+  }
+  @media (max-width: 560px){
+    .more-grid{grid-template-columns:1fr;}
+    .hero-actions, .contact-actions{flex-direction:column; align-items:stretch;}
+    .badge-top{right:6px;}
+    .badge-bottom{left:6px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="logo"><span class="logo-mark" aria-hidden="true"></span>Soniya Ghimire</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#education">Education</a></li>
+    </ul>
+    <a class="nav-cta" href="#contact">Let's talk →</a>
+  </div>
+</header>
+
+<main>
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <span class="eyebrow mono">Open to internships · Kathmandu, Nepal</span>
+      <h1>I design the screen,<br>then I <em>build</em> it too.</h1>
+      <p class="hero-sub">BSc CSIT student working across UI/UX design and frontend development — from user research and Figma wireframes to responsive, shipped interfaces.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://www.behance.net/soniaghimire" target="_blank" rel="noopener">View case studies on Behance </a>
+        <a class="btn btn-ghost-dark" href="https://www.linkedin.com/in/sonia-ghimire-8943b5285" target="_blank" rel="noopener">Connect on LinkedIn </a>
+        <!-- CV DOWNLOAD: place your real CV PDF next to this HTML file with this exact filename,
+             or replace the href with a Google Drive / Dropbox share link. -->
+        <a class="btn btn-ghost-dark" href="Both.pdf" download target="_blank" rel="noopener">Download CV ↓</a>
+      </div>
+    </div>
+    <div class="wrap marquee-wrap">
+      <div class="marquee mono" aria-hidden="true">
+        <span><b>Figma</b> · UX Research · Wireframing · <b>HTML / CSS / JS</b> · Design Thinking · <b>Prototyping</b> · Accessibility · User Flows · GitHub ·</span>
+        <span><b>Figma</b> · UX Research · Wireframing · <b>HTML / CSS / JS</b>  · Design Thinking · <b>Prototyping</b> · Accessibility · User Flows · GitHub ·</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ABOUT (photo lives here) ================= -->
+  <section class="section-pad about" id="about">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <span class="section-tag">01 · About</span>
+          <h2>A designer who ships her own screens</h2>
+        </div>
+        <p>Trained in design thinking, comfortable in the codebase — that combination is what I bring to a product team.</p>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-photo-wrap reveal">
+          <div class="about-photo-card">
+            <div class="about-photo">
+              <img src="images/sonia.jpg" alt="Portrait of Soniya Ghimire">
+            </div>
+            <span class="badge-float badge-top"><span class="dot"></span>Available for internships</span>
+            <span class="badge-float badge-bottom"> Kathmandu, NP</span>
+          </div>
+        </div>
+
+        <div class="about-copy reveal">
+          <p class="kicker">"I got into computer science through code, and into design because I kept wanting more control over how that code felt to use."</p>
+          <p>I'm a final-year BSc CSIT student. Most of my work lives at the intersection of design and development: I run the user research and wireframing myself in Figma, then follow the project through to a working, responsive build.</p>
+          <p>I like projects with a real user at the end of them — someone booking a hotel, scanning a plant, or trying to book a doctor's appointment without getting confused halfway through. Looking for an internship where I can take a problem from a Figma frame all the way to a browser tab.</p>
+
+          <div class="stat-row">
+            <div class="stat"><b>8th</b><span>Semester, BSc CSIT</span></div>
+            <div class="stat"><b>5+</b><span>Projects shipped</span></div>
+    
+          </div>
+
+          <div class="skills-panel">
+            <div class="skill-block">
+              <h3>Design</h3>
+              <div class="chips">
+                <span class="chip emerald">Figma</span>
+                <span class="chip emerald">Wireframing &amp; Prototyping</span>
+                <span class="chip emerald">User Flows</span>
+                <span class="chip emerald">User Research</span>
+                <span class="chip emerald">Design Thinking</span>
+              </div>
+            </div>
+            <div class="skill-block">
+              <h3>Frontend</h3>
+              <div class="chips">
+                <span class="chip violet">HTML</span>
+                <span class="chip violet">CSS</span>
+                <span class="chip violet">JavaScript</span>
+              </div>
+            </div>
+            <div class="skill-block">
+              <h3>Tools &amp; working style</h3>
+              <div class="chips">
+                <span class="chip">VS Code</span>
+                <span class="chip">Canva</span>
+                <span class="chip">GitHub</span>
+                <span class="chip apricot">Communication</span>
+                <span class="chip apricot">Team Collaboration</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WORK ================= -->
+  <section class="section-pad work" id="work">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <span class="section-tag">02 · Selected Work</span>
+          <h2>Case studies &amp; builds</h2>
+        </div>
+        <p>Projects, from full UX case study to hands-on frontend.</p>
+      </div>
+
+      <div class="work-list">
+
+        <!-- Green Haven -->
+        <article class="work-card reveal">
+          <div class="work-visual">
+            <span class="work-index mono">01</span>
+            <!-- Replace this src with your exported Green Haven mockup/cover image from Behance -->
+            <img src="images/green.jpg" alt="Green Haven plant care app mockup screens">
+          </div>
+          <div class="work-body">
+            <span class="work-role mono">Role — UI/UX Designer</span>
+            <h3>Green Haven — plant care &amp; plant-selling app</h3>
+            <p>A mobile app concept for people who keep killing their houseplants. Full case study, from research to final screens, published on Behance.</p>
+            <ul class="work-list-items">
+              <li>Ran user research and mapped the core user flows before opening Figma</li>
+              <li>Designed an AI-powered plant scanner flow as the app's entry point</li>
+              <li>Prioritised intuitive navigation and accessible contrast and type sizes throughout</li>
+            </ul>
+            <div class="work-footer">
+              <div class="work-tags">
+                <span class="chip emerald">UX Research</span>
+                <span class="chip emerald">Wireframes</span>
+                <span class="chip emerald">Mobile UI</span>
+                <span class="chip emerald">Figma</span>
+              </div>
+              <a class="work-link" href="https://www.behance.net/gallery/231453315/GreenHeaven-Plant-App-UIUX-Design" target="_blank" rel="noopener">Read the case study </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ShineAura -->
+        <article class="work-card reveal">
+          <div class="work-visual v-apricot">
+            <span class="work-index mono">02</span>
+            <!-- Replace this src with your exported ShineAura mockup/cover image from Behance -->
+            <img src="images/shineaura.png" alt="ShineAura AR jewelry try-on app mockup screens">
+          </div>
+          <div class="work-body">
+            <span class="work-role mono">Role — UI/UX Designer</span>
+            <h3>ShineAura — AR jewelry try-on shopping app</h3>
+            <p>An e-commerce app concept for jewelry shoppers, letting them try on rings, earrings and necklaces virtually before adding to cart. Full case study published on Behance.</p>
+            <ul class="work-list-items">
+              <li>Designed the browsing, product-detail and cart flow for a jewelry storefront</li>
+              <li>Built an AR try-on feature so shoppers can preview pieces on themselves in real time</li>
+              <li>Documented every screen as a detailed, presentation-ready Behance case study</li>
+            </ul>
+            <div class="work-footer">
+              <div class="work-tags">
+                <span class="chip apricot">AR/VR</span>
+                <span class="chip apricot">E-commerce UX</span>
+                <span class="chip apricot">Figma</span>
+                <span class="chip apricot">Prototyping</span>
+              </div>
+              <a class="work-link" href="https://www.behance.net/gallery/252383033/ShineAura-AR-Jewelry-Try-On-Shopping-App" target="_blank" rel="noopener">Read the case study </a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= EDUCATION / RESUME ================= -->
+  <section class="section-pad" id="education">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <span class="section-tag">03 · Education &amp; Resume</span>
+          <h2>The paperwork</h2>
+        </div>
+        <p>Full detail, dates and references live in the CV.</p>
+      </div>
+
+      <div class="split reveal">
+        <div class="edu-card">
+          <span class="mono">2023 — Expected 2027</span>
+          <h3>BSc Computer Science &amp; Information Technology</h3>
+          <p>National College of Computer Studies (NCCS), Tribhuvan University</p>
+          <p>7th semester, final year — coursework spanning software development, machine learning and UI/UX design.</p>
+          <div class="langs"><span>EN — Fluent</span><span>NE — Native</span></div>
+        </div>
+
+        <div class="resume-card">
+          <div>
+            <h3>Want the full resume?</h3>
+            <p>Every project, tool and detail from this page, laid out as a one-page CV — ready to attach to an application.</p>
+          </div>
+          <!-- Same file as the hero button above — keep both pointing at the same PDF -->
+          <a class="btn btn-primary" href="Both.pdf" download target="_blank" rel="noopener">Download CV (PDF) ↓</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <span class="eyebrow mono">Open to internships</span>
+      <h2>Let's build something a <em>user</em><br>actually enjoys using.</h2>
+      <div class="contact-actions">
+        <a class="btn btn-primary" href="mailto:ghimiresonia099@gmail.com">Email me </a>
+        <a class="btn btn-ghost-dark" href="tel:9860923551">Call — 9860923551</a>
+      </div>
+      <div class="contact-links">
+        <a href="https://www.behance.net/soniaghimire" target="_blank" rel="noopener">Behance </a>
+        <a href="https://www.linkedin.com/in/sonia-ghimire-8943b5285" target="_blank" rel="noopener">LinkedIn </a>
+        <a href="https://github.com/ghimiresonia099" target="_blank" rel="noopener">GitHub </a>
+        <a href="mailto:ghimiresonia099@gmail.com">ghimiresonia099@gmail.com</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap footer-row">
+    <span>© 2026 Soniya Ghimire</span>
+    <span>Kathmandu, Nepal</span>
+  </div>
+</footer>
+
+<script>
+  var els = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, {threshold:0.12});
+    els.forEach(function(el){ io.observe(el); });
+  } else {
+    els.forEach(function(el){ el.classList.add('in'); });
+  }
+</script>
+
+</body>
+</html>
