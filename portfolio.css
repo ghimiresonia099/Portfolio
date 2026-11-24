@@ -558,3 +558,4 @@ footer{border-top:1px solid var(--line); padding:32px 0; background:var(--paper)
 .exp-projects h4{font-family:'Inter',sans-serif; font-size:15px; font-weight:600; margin:0 0 4px;}
 .exp-projects p{font-size:14px; color:var(--text-soft); margin:0;}
 @media (max-width:980px){ .exp-card{grid-template-columns:1fr; gap:24px;} }
+.exp-single{grid-template-columns:1fr;}
